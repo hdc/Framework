@@ -88,3 +88,21 @@
 
 .no-wrap
   white-space: nowrap
+
+.well
+  min-height: 21px
+  padding: $baseline-rhythm * 2
+  margin-bottom: $baselineheight
+  background-color: $wellbackground
+  border: $wellborderwidth $wellborderstyle $wellbordercolor
+  +border-radius(3px)
+  +box-shadow
+  p:last-child
+    margin-bottom: 0
+
+.well-large
+  padding: $baseline-rhythm * 4
+
+.well-small
+  padding: $baseline-rhythm
+  +border-radius(2px)

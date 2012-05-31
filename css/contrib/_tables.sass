@@ -1,14 +1,26 @@
 // Basic table styling.
 
+$table-background: transparent
+$table-stripe: darken($light-rule-color, 10%)
+$table-hover: darken($light-rule-color, 20%)
+$table-border: $light-rule-color
+$table-border-width: 1px
+$table-border-style: solid
+
 .table-cell
   padding: $baseline-rhythm
   padding-bottom: $baseline-rhythm - 1px
   border-bottom: 1px solid $light-rule-color
   text-align: left
+  vertical-align: top
+  border-top: $table-border-width $table-border-style $table-border
 
 table
   @extend .text-block
   width: 100%
+  border-collapse: collapse
+  border-spacing: 0
+  background-color: $table-background
 
   td, th
     @extend .table-cell
@@ -28,9 +40,40 @@ table
     @extend .small-font
     @extend .uppercase
     color: $weak-text-color
-    
-  &.striped
 
-    tbody tr:nth-child(odd)
-      background-color: $extra-light-screen-color
+  thead th
+    vertical-align: bottom
+  colgroup + thead tr:first-child th,
+  colgroup + thead tr:first-child td,
+  thead:first-child tr:first-child th,
+  thead:first-child tr:first-child td
+    border-top: 0
+  tbody + tbody
+    border-top: $table-border-width * 2 $table-border-style $table-border
+  tbody tr td,
+  tbody tr th
+    +transition(background-color 0.25s 0 linear)
+  tbody tr:hover td,
+  tbody tr:hover th
+    background-color: $table-hover
+  
+  // Tables Striped 
+  &.table-striped
+    tbody tr:nth-child(odd) td,
+    tbody tr:nth-child(odd) th
+      background-color: $table-stripe
+
+  // Tables Bordered
+  &.table-bordered
+    border: $table-border-width $table-border-style $table-border
+    border-left: 0
+    border-collapse: separate
+    *border-collapse: collapsed
+    th,
+    td
+      border-left: $table-border-width $table-border-style $table-border
+    thead:first-child tr:first-child th,
+    tbody:first-child tr:first-child th,
+    tbody:first-child tr:first-child td
+      border-top: 0
 
